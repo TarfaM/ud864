@@ -7,21 +7,78 @@ API Course, Lesson 1 -->
      html, body { height: 100%; margin: 0; padding: 0; }
      #map { height: 100%; }
    </style>
+
  </head>
  <body>
    <!-- TODO 1: Create a place to put the map in the HTML-->
-   <div></div>
+   <div id="map"></div>
+
    <script>
      // TODO: Create a map variable
-
      // TODO: Complete the following function to initialize the map
-     function initMap() {
+     var map = [] ;
+       function initMap() {
+         var map = new google.maps.Map(document.getElementById('map'), {
+           center: {lat: 24.782661, lng: 46.629109},
+            zoom: 8
+          });
+          //uluru ={lat: 24.783495, lng: 46.621242};
+     var locations = [
+       {title:'Danube Hypermarket Al Malqa' ,location: {lat: 24.807972, lng: 46.615403}},
+       {title:'The Nail Corner ركن الأظافر' ,location: {lat: 24.807018, lng: 46.615768}},
+       {title:'Tilal AlRiyadh' ,location: {lat: 24.800887, lng: 46.611532}}
+     ];
+
+// var infowindow = new google.maps.InfoWindow();
+var i  ;
+var largeInfowindow = new google.maps.InfoWindow();
+var bounds = new google.maps.LatLngBounds();
+// var largeInfowindow = new google.maps.InfoWindow({
+// content: 'hello '
+// content: 'مدرسة شروقه '
+// content :'هاذي مدرسه شروقه الحلوه'
+                //  });
+      // for (i ; i<locations.length ; i++)
+      for (i = 0; i < locations.length; i++)
+      {
+        var position = locations[i].location;
+          var title = locations[i].title;
+          var marker = new google.maps.Marker({
+                  map: map ,
+                  position: position,
+                  title:title,
+                  animation:google.maps.Animation.DROP,
+                  id:i
+                });
+          markers.push(marker);
+          bounds.extend(marker.position);
+          marker.addListener('click',function() {
+          populateInfoWindow(this,largeInfowindow);
+     // infowindow.open(map ,marker);
+                     });
+  }
+
+  function populateInfoWindow (marker,infowindow ){
+
+if (infowindow.marker !=marker){
+  infowindow.marker = marker;
+  infowindow.setContent('<div>' + marker.title + '</div>');
+  infowindow.open(map , marker);
+  marker.addListener('closeclick',function(){
+  infowindow.setMarker(null);
+// infowindow.open(map ,marker);
+             });
+ }
+
+
+  }
+  //end loop
        // TODO: use a constructor to create a new map JS object. You can use the coordinates
        // we used, 40.7413549, -73.99802439999996 or your own!
-     }
-   </script>
-   <!--TODO: Load the JS API ASYNCHRONOUSLY below.-->
-   <script>
-   </script>
+</script>
+   </script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
+      async defer>
+
+
  </body>
 </html>
