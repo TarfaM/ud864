@@ -50,6 +50,7 @@ var bounds = new google.maps.LatLngBounds();
                   animation:google.maps.Animation.DROP,
                   id:i
                 });
+          var markers =[];
           markers.push(marker);
           bounds.extend(marker.position);
           marker.addListener('click',function() {
@@ -69,15 +70,17 @@ if (infowindow.marker !=marker){
 // infowindow.open(map ,marker);
              });
  }
-
+}
 
   }
   //end loop
        // TODO: use a constructor to create a new map JS object. You can use the coordinates
        // we used, 40.7413549, -73.99802439999996 or your own!
 </script>
-   </script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
-      async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
+      async defer></script>
+  //  </script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
+  //     async defer>
 
 
  </body>
